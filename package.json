@@ -1,5 +1,5 @@
 {
-  "name": "MemoryGame",
+  "name": "DotsAndBoxes",
   "description": "Multiplayer Memory Game with React and FeathersJS.",
   "version": "0.0.0",
   "homepage": "",
