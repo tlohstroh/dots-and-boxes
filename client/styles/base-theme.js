@@ -1,5 +1,6 @@
 import { sansSerif } from './fonts';
 import {
+  cyan600,
   red500,
   cyan700,
   grey600,
@@ -16,7 +17,7 @@ export default {
   fontFamily: sansSerif,
   boxShadow: '1px -1px 5px rgba(0,0,0,0.3)',
   palette: {
-    primary1Color: red500,
+    primary1Color: cyan600,
     primary2Color: cyan700,
     primary3Color: grey600,
     accent1Color: pinkA200,
