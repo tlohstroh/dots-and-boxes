@@ -7,6 +7,8 @@ import Paper from 'material-ui/Paper'
 import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
 import saveGame from '../actions/update-game'
+import CanvasComponent from '../components/Canvas'
+
 import './Game.sass'
 
 const PLAYER_COLORS = ['#0f0', '#00f']
@@ -58,6 +60,10 @@ class Game extends Component {
         <p>Is player: { this.isPlayer() ? 'Yes' : 'No' }</p>
         <p>Can join: { this.canJoin() ? 'Yes' : 'No' }</p>
         { game.players.map((player) => player.name) }
+        <div>
+          <h1>Game Board here:</h1>
+        </div>
+        <CanvasComponent/>
       </div>
     )
   }
