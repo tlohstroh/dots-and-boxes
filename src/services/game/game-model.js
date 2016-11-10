@@ -8,20 +8,32 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const cardSchema = new Schema({
-  symbol: { type: String, required: true },
-  flipped: { type: Boolean, required: true, 'default': false },
+const lineSchema = new Schema({
+  taken: { type: Boolean, required: true, "default": false },
+  lineId: { type: Number, required: true }
+});
+
+const boxSchema = new Schema({
+  lines: [lineSchema],
+  color: { type: String, required: true }
+});
+
+const boardSchema = new Schema({
+  // lines: [lineSchema],
+  boxes: [boxSchema]
 });
 
 const playerSchema = new Schema({
   userId: { type: Schema.Types.ObjectId, ref: 'user' },
   color: { type: String, required: false },
   name: { type: String, required: true },
-  pairs: [String]
+  points: { type: Number, required: true, 'default': 0 }
 });
 
 const gameSchema = new Schema({
-  cards: [cardSchema],
+  // boxes: [boxSchema],
+  // lines: [lineSchema],
+  board: [boardSchema],
   players: [playerSchema],
   started: { type: Boolean, required: true, 'default': false },
   winner: { type: Number, required: false },
