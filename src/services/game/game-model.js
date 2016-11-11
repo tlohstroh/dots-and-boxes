@@ -15,11 +15,7 @@ const edgeSchema = new Schema({
 
 const boxSchema = new Schema({
  boxId: { type: String, required: true },
- edges: [edgeSchema],
-});
-
-const boardSchema = new Schema({
- boxes: [boxSchema],
+ boxEdges: [String],
 });
 
 const playerSchema = new Schema({
@@ -30,7 +26,8 @@ const playerSchema = new Schema({
 });
 
 const gameSchema = new Schema({
- board: [boardSchema],
+ boxes: [boxSchema],
+ edges: [edgeSchema],
  players: [playerSchema],
  started: { type: Boolean, required: true, 'default': false },
  winner: { type: Number, required: false },
