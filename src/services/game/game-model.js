@@ -28,6 +28,7 @@ const playerSchema = new Schema({
 const gameSchema = new Schema({
  boxes: [boxSchema],
  edges: [edgeSchema],
+ takenEdges: [String],
  players: [playerSchema],
  started: { type: Boolean, required: true, 'default': false },
  winner: { type: Number, required: false },

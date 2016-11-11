@@ -7,50 +7,54 @@
 
 const defaults = {};
 
+function checkWinner(array){
+  // filter the taken edges so we only have the true ones
+  var takenEdges = edges.filter(edge => edge.taken === true)
+  // create a new array with only the actual taken edgeId's in it
+  var takenEdgesIds = takenEdges.map(function(id){
+    return id.edgeId
+  });
+  // check how many of those id's match with the boxEdges array of the current box
+  // if 4 match -> it means the player won this box!
+  if(takenEdgesIds.filter(id => array.indexOf(id) !== -1).length === 4){
+    console.log("is Box Won")
+    return true
+    }
+}
+
+
 module.exports = function(options) {
   options = Object.assign({}, defaults, options);
 
   return function(hook) {
-    const cards = hook.data.cards;
+    const boxes = hook.data.boxes;
+    const edges = hook.data.edges;
     const turn = hook.data.turn;
     const players = hook.data.players;
+    const takenEdges = hook.data.takenEdges
+    const clickedEdge = takenEdges[(takenEdges.length)-1]
 
-    const flippedCards = cards.filter((card) => (card.flipped))
+    // filter out the boxes that have pickedEdge in them
+    const matchingBoxes = boxes.filter(box => box.boxEdges.indexOf(clickedEdge) !== -1)
 
-    if (flippedCards.length === 2) {
-      if (flippedCards[0].symbol === flippedCards[1].symbol) {
-        players[turn].pairs.push(flippedCards[0].symbol)
-        const possiblePairs = cards.length / 2
-        const wonPairs = players.map((player) => { return player.pairs.length })
-          .reduce((prev, next) => { return prev + next }, 0)
 
-        if ((possiblePairs - wonPairs) === 0) {
-          const highestScore = players.reduce((prevPairs, nextPlayer) => {
-            const nextPairs = nextPlayer.pairs.length
-            return prevPairs > nextPairs ? prevPairs : nextPairs
-          }, 0)
 
-          let winners = []
-          players.map((player, index) => {
-            if (player.pairs.length === highestScore) {
-              winners.push(index)
-            }
-          })
-
-          if (winners.length === 1) {
-            hook.data.winner = winners[0]
-          } else {
-            hook.data.draw = true
-          }
-        }
-      } else {
-        const totalPlayers = players.length
-        let nextTurn = turn + 1
-        if (nextTurn > totalPlayers - 1) {
-          nextTurn = 0
-        }
-        hook.data.turn = nextTurn
-      }
+    // check voor box 1
+    if (checkWinner(matchingBoxes[0].boxEdges) === true){
+      // TODO do stuff to give the player points
     }
+    else if ((matchingBoxes.length === 2) && (checkWinner(matchingBoxes[1].boxEdges) === true)){
+      // TODO do stuff to give the player points
+    }
+    else{
+      //give turn to other player
+    }
+
+
+
+
+
+
+
   };
 };
