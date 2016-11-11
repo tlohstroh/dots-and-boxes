@@ -43,7 +43,7 @@ module.exports = function(options) {
     if (checkWinner(matchingBoxes[0].boxEdges) === true){
       // TODO do stuff to give the player points
     }
-    else if (matchingBoxes.lenght === 2) && checkWinner(matchingBoxes[1].boxEdges) === true{
+    else if ((matchingBoxes.length === 2) && (checkWinner(matchingBoxes[1].boxEdges) === true)){
       // TODO do stuff to give the player points
     }
     else{
