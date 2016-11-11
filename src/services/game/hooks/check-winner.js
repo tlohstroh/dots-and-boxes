@@ -10,11 +10,11 @@ const defaults = {};
 function checkWinner(array){
   // filter the taken edges so we only have the true ones
   var takenEdges = edges.filter(edge => edge.taken === true)
-  // create a new array with only the actual edgeId's in it
+  // create a new array with only the actual taken edgeId's in it
   var takenEdgesIds = takenEdges.map(function(id){
     return id.edgeId
   });
-  // check how many of those id's match with the boxEdges of the first box
+  // check how many of those id's match with the boxEdges array of the current box
   // if 4 match -> it means the player won this box!
   if(takenEdgesIds.filter(id => array.indexOf(id) !== -1).length === 4){
     console.log("is Box Won")
