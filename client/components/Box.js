@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import './edge.sass'
-import onClick from '../reducers/onClick'
+import './box.sass'
 
-class Edge extends Component {
+class Box extends Component {
  render() {
    const { type } = this.props
    return (
@@ -12,18 +11,10 @@ class Edge extends Component {
  }
 }
 
-// onClick () {
-//   render(){
-//
-//   return(
-//
-//   )
-//   }
-// }
 
 const mapStateToProps = (state) => {
  return {}
 }
 //
 
-export default Edge
+export default Box

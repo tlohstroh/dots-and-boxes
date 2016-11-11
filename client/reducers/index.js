@@ -3,11 +3,13 @@ import currentUser from './currentUser'
 import formErrors from './formErrors'
 import games from './games'
 import loading from './loading'
+import onClick from './onClick'
 
 module.exports = {
   currentGame,
   currentUser,
   formErrors,
   games,
-  loading
+  loading,
+  onClick,
 }
