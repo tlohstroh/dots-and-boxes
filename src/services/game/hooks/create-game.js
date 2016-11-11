@@ -45,8 +45,16 @@ module.exports = function(options) {
     // set boxId to id.
     hook.data.boxes = boxIds.map((id) => ({boxId: id, boxEdges: []}))
 
-    // assign 4 edges to each box.
-
+    // assign 4 edges to each box
+    hook.data.boxes[0].boxEdges = [ 0, 3, 4, 7 ]
+    hook.data.boxes[1].boxEdges = [ 1, 4, 5, 8 ]
+    hook.data.boxes[2].boxEdges = [ 2, 5, 6, 9 ]
+    hook.data.boxes[3].boxEdges = [ 7, 10, 11, 14 ]
+    hook.data.boxes[4].boxEdges = [ 8, 11, 12, 15 ]
+    hook.data.boxes[5].boxEdges = [ 9, 12, 13, 16 ]
+    hook.data.boxes[6].boxEdges = [ 14, 17, 18, 12 ]
+    hook.data.boxes[7].boxEdges = [ 15, 18, 19, 22 ]
+    hook.data.boxes[8].boxEdges = [ 16, 19, 20, 23 ]
 
     // Add the logged in user as the first player
     hook.data.players = [{
@@ -54,6 +62,5 @@ module.exports = function(options) {
       name: user.name,
       color: '#f00'
     }];
-
   };
 };
