@@ -5,12 +5,10 @@ import onClick from '../reducers/onClick'
 
 class Edge extends Component {
  render() {
-   const { edgeId, taken } = this.props
-
+   const { edgeId, taken, type } = this.props
 
    return (
-     <div>
-       {/* TODO: Render  */}
+     <div className={ type }>
      </div>
    )
  }
