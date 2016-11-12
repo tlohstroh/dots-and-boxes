@@ -11,6 +11,7 @@ const Schema = mongoose.Schema;
 const edgeSchema = new Schema({
   edgeId: { type: String, required: true },
   taken: { type: Boolean, required: true, 'default': false },
+  type: { type: String, required: true, 'default': "vertical"},
 });
 
 const boxSchema = new Schema({
@@ -28,7 +29,7 @@ const playerSchema = new Schema({
 const gameSchema = new Schema({
  boxes: [boxSchema],
  edges: [edgeSchema],
- takenEdges: [String],
+ takenEdgesIds: [String],
  players: [playerSchema],
  started: { type: Boolean, required: true, 'default': false },
  winner: { type: Number, required: false },

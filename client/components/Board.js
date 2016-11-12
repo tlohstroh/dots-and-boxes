@@ -1,60 +1,23 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import './Board.sass'
-import Edge from './Edge'
 import Box from './Box'
 
 
 class Board extends React.Component {
-
    render() {
+     var boxes = this.props.game.boxes
 
-     return(
-       <div>
-         <Edge type="horizontal" />
-         <Edge type="horizontal" />
-         <Edge type="horizontal" />
-         <br></br>
-         <Edge type="vertical" />
-         <Box type="box" />
-         <Edge type="vertical" />
-         <Box type="box" />
-         <Edge type="vertical" />
-         <Box type="box" />
-         <Edge type="vertical" />
-         <br></br>
-         <Edge type="horizontal" />
-         <Edge type="horizontal" />
-         <Edge type="horizontal" />
-         <br></br>
-         <Edge type="vertical" />
-         <Box type="box" />
-         <Edge type="vertical" />
-         <Box type="box" />
-         <Edge type="vertical" />
-         <Box type="box" />
-         <Edge type="vertical" />
-         <br></br>
-         <Edge type="horizontal" />
-         <Edge type="horizontal" />
-         <Edge type="horizontal" />
-         <br></br>
-         <Edge type="vertical" />
-         <Box type="box" />
-         <Edge type="vertical" />
-         <Box type="box" />
-         <Edge type="vertical" />
-         <Box type="box" />
-         <Edge type="vertical" />
-         <br></br>
-         <Edge type="horizontal" />
-         <Edge type="horizontal" />
-         <Edge type="horizontal" />
+     return (
+       <div className="board">
+       { boxes.map((box) => {
+         return <Box
+         key={box.boxId}
+         { ...box } />
+       })}
        </div>
+      )
 
-
-
-     )
    }
 }
 
@@ -63,7 +26,9 @@ class Board extends React.Component {
 
 
 const mapStateToProps = (state) => {
- return {}
+ return {
+   game: state.games.filter((game) => game._id === state.currentGame)[0],
+ }
 }
 
 export default connect(mapStateToProps,{})(Board)

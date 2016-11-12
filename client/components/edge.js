@@ -5,25 +5,21 @@ import onClick from '../reducers/onClick'
 
 class Edge extends Component {
  render() {
-   const { type } = this.props
+   const { edgeId, taken, type } = this.props
+
    return (
-     <div className={type}></div>
+     <div className={ type }>
+     </div>
    )
  }
 }
 
-// onClick () {
-//   render(){
-//
-//   return(
-//
-//   )
-//   }
-// }
 
-const mapStateToProps = (state) => {
- return {}
+
+Edge.propTypes = {
+  edgeId: PropTypes.string.isRequired,
+  // taken: PropTypes.boolean.isRequired,
+  // type: PropTypes.string.isRequired,
 }
-//
 
 export default Edge
