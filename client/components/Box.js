@@ -6,15 +6,13 @@ class Box extends Component {
  render() {
    const { type } = this.props
    return (
-     <div className={type}></div>
+     <div ></div>
    )
  }
 }
 
 
-const mapStateToProps = (state) => {
- return {}
-}
+
 //
 
 export default Box
