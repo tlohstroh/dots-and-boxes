@@ -1,14 +1,26 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import './edge.sass'
-import onClick from '../reducers/onClick'
+import './Edge.sass'
+import saveGame from '../actions/update-game'
+import takeEdge from '../actions/take-edge'
 
-class Edge extends Component {
+export class Edge extends Component {
+
+  takeEdge(){
+    // const edge = this
+    //var edges = this.props.game.edges
+    const { edgeId, taken, type } = this.props
+    console.log("I want this edge")
+    saveGame()
+    console.log("I took this edge")
+
+  }
+
  render() {
    const { edgeId, taken, type } = this.props
 
    return (
-     <div className={ type }>
+     <div className={ type } onClick={ this.takeEdge.bind(this) }>
      </div>
    )
  }
@@ -22,4 +34,10 @@ Edge.propTypes = {
   // type: PropTypes.string.isRequired,
 }
 
-export default Edge
+const mapStateToProps = (state) => {
+ return {
+    game: state.games.filter((game) => game._id === state.currentGame)[0]
+ }
+}
+
+export default connect(null, {saveGame})(Edge)
