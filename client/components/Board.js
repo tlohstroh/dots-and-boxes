@@ -7,7 +7,6 @@ import Box from './Box'
 class Board extends React.Component {
    render() {
      var boxes = this.props.game.boxes
-
      return (
        <div className="board">
        { boxes.map((box) => {

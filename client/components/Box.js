@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import './box.sass'
-import './edge.sass'
+import './Edge.sass'
 import Edge from './Edge'
 
 class Box extends Component {
