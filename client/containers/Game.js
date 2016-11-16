@@ -36,7 +36,9 @@ class Game extends Component {
     saveGame(game, { players: game.players.concat({
       userId: currentUser._id,
       name: currentUser.name,
+      playerTurn: (game.players.length),
       color: PLAYER_COLORS[game.players.length],
+
     })})
   }
 

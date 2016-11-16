@@ -80,7 +80,8 @@ module.exports = function(options) {
     hook.data.players = [{
       userId: user._id,
       name: user.name,
-      color: '#f00'
+      color: '#f00',
+      playerTurn: 0,
     }];
   };
 };
