@@ -18,7 +18,9 @@ export class Edge extends Component {
     const player = players.filter((player) => player.userId === currentUser._id)
 
     console.log("I want this edge")
-    if(player[0].playerTurn !== "0"){
+    console.log("turn = " + game.turn)
+    debugger
+    if(player[0].playerTurn !== game.turn){
         alert("Not your turn!")
       }
     else{
@@ -34,7 +36,7 @@ export class Edge extends Component {
   }
 
  render() {
-   console.log(this.props)
+  //  console.log(this.props)
    const { taken, type } = this.props
 
    const classNames = [
