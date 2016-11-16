@@ -2,42 +2,53 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import './Edge.sass'
 import saveGame from '../actions/update-game'
-import takeEdge from '../actions/take-edge'
 
 export class Edge extends Component {
+  static propTypes = {
+    game: PropTypes.object.isRequired,
+    currentUser: PropTypes.object.isRequired,
+    edgeId: PropTypes.string.isRequired,
+    taken: PropTypes.bool.isRequired,
+    type: PropTypes.string.isRequired,
+  }
 
   takeEdge(){
-    // const edge = this
-    //var edges = this.props.game.edges
-    const { edgeId, taken, type } = this.props
     console.log("I want this edge")
-    saveGame()
-    console.log("I took this edge")
+    const { game, edgeId, saveGame } = this.props
+    const newEdges = game.edges.map((edge) => {
+      if (edge.edgeId === edgeId) {
+        return Object.assign({}, edge, { taken: true })
+      }
 
+      return edge
+    })
+    saveGame(game, { edges: newEdges })
   }
 
  render() {
-   const { edgeId, taken, type } = this.props
+   console.log(this.props)
+   const { taken, type } = this.props
+
+   const classNames = [
+     type,
+     taken ? 'taken' : 'free'
+   ]
 
    return (
-     <div className={ type } onClick={ this.takeEdge.bind(this) }>
-     </div>
+     <div className={ classNames.join(' ') } onClick={ this.takeEdge.bind(this) } />
    )
  }
 }
 
+const mapStateToProps = ({ games, currentGame, currentUser }, { edgeId }) => {
+  const game = games.filter((game) => game._id === currentGame)[0]
+  const edge = game.edges.filter((edge) => edge.edgeId === edgeId)
 
-
-Edge.propTypes = {
-  edgeId: PropTypes.string.isRequired,
-  // taken: PropTypes.boolean.isRequired,
-  // type: PropTypes.string.isRequired,
+  return {
+    game,
+    currentUser,
+    ...edge
+  }
 }
 
-const mapStateToProps = (state) => {
- return {
-    game: state.games.filter((game) => game._id === state.currentGame)[0]
- }
-}
-
-export default connect(null, {saveGame})(Edge)
+export default connect(mapStateToProps, {saveGame})(Edge)

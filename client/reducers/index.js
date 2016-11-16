@@ -4,7 +4,6 @@ import formErrors from './formErrors'
 import games from './games'
 import loading from './loading'
 
-
 module.exports = {
   currentGame,
   currentUser,

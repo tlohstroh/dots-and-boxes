@@ -16,10 +16,10 @@ function checkWinner(array){
   // });
   // check how many of those id's match with the boxEdges array of the current box
   // if 4 match -> it means the player won this box!
-  if(takenEdgesIds.filter(id => array.indexOf(id) !== -1).length === 4){
-    console.log("is Box Won")
-    return true
-    }
+  // if(takenEdgesIds.filter(id => array.indexOf(id) !== -1).length === 4){
+  //   console.log("is Box Won")
+  //   return true
+  //   }
 }
 
 
@@ -27,36 +27,29 @@ module.exports = function(options) {
   options = Object.assign({}, defaults, options);
 
   return function(hook) {
-    const boxes = hook.data.boxes;
-    const edges = hook.data.edges;
-    const turn = hook.data.turn;
-    const players = hook.data.players;
-    const takenEdgesIds = hook.data.takenEdgesIds
-    const clickedEdgeId = takenEdges[(takenEdgesIds.length)-1]
-
-
-
-    // filter out the boxes that have pickedEdge in them
-    const matchingBoxes = boxes.filter(box => box.boxEdges.indexOf(clickedEdgeId) !== -1)
-
-
-
-    // check voor box 1
-    if (checkWinner(matchingBoxes[0].boxEdges) === true){
-      // TODO do stuff to give the player points
-    }
-    else if ((matchingBoxes.length === 2) && (checkWinner(matchingBoxes[1].boxEdges) === true)){
-      // TODO do stuff to give the player points
-    }
-    else{
-      //give turn to other player
-    }
-
-
-
-
-
-
-
-  };
-};
+    // const boxes = hook.data.boxes;
+    // const edges = hook.data.edges;
+    // const turn = hook.data.turn;
+    // const players = hook.data.players;
+    // const takenEdgesIds = hook.data.takenEdgesIds
+    // const clickedEdgeId = takenEdges[(takenEdgesIds.length)-1]
+    //
+    //
+    //
+    // // filter out the boxes that have pickedEdge in them
+    // const matchingBoxes = boxes.filter(box => box.boxEdges.indexOf(clickedEdgeId) !== -1)
+    //
+    //
+    //
+    // // check voor box 1
+    // if (checkWinner(matchingBoxes[0].boxEdges) === true){
+    //   // TODO do stuff to give the player points
+    // }
+    // else if ((matchingBoxes.length === 2) && (checkWinner(matchingBoxes[1].boxEdges) === true)){
+    //   // TODO do stuff to give the player points
+    // }
+    // else{
+    //   //give turn to other player
+    // }
+  }
+}
