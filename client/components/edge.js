@@ -4,6 +4,14 @@ import './Edge.sass'
 import saveGame from '../actions/update-game'
 
 export class Edge extends Component {
+  static propTypes = {
+    game: PropTypes.object.isRequired,
+    currentUser: PropTypes.object.isRequired,
+    edgeId: PropTypes.string.isRequired,
+    taken: PropTypes.bool.isRequired,
+    type: PropTypes.string.isRequired,
+  }
+
   takeEdge(){
     console.log("I want this edge")
     const { game, edgeId, saveGame } = this.props
@@ -27,18 +35,9 @@ export class Edge extends Component {
    ]
 
    return (
-     <div className={ classNames.join(' ') } onClick={ this.takeEdge.bind(this) }>
-     </div>
+     <div className={ classNames.join(' ') } onClick={ this.takeEdge.bind(this) } />
    )
  }
-}
-
-
-
-Edge.propTypes = {
-  edgeId: PropTypes.string.isRequired,
-  // taken: PropTypes.boolean.isRequired,
-  // type: PropTypes.string.isRequired,
 }
 
 const mapStateToProps = ({ games, currentGame, currentUser }, { edgeId }) => {
