@@ -22,6 +22,7 @@ const boxSchema = new Schema({
 const playerSchema = new Schema({
  userId: { type: Schema.Types.ObjectId, ref: 'user' },
  color: { type: String, required: false },
+ playerTurn: { type: String, required: true },
  name: { type: String, required: true },
  boxes: [String]
 });
