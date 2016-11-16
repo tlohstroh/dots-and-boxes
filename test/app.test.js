@@ -29,6 +29,7 @@ describe('Feathers application tests', function() {
           'Accept': 'text/html'
         }
       }, function(err, res, body) {
+        assert.equal(body.message, 'Page not found');
         assert.equal(res.statusCode, 404);
         assert.ok(body.indexOf('<html>') !== -1);
         done(err);
