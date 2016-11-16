@@ -19,7 +19,6 @@ export class Edge extends Component {
 
     console.log("I want this edge")
     console.log("turn = " + game.turn)
-    debugger
     if(player[0].playerTurn !== game.turn){
         alert("Not your turn!")
       }

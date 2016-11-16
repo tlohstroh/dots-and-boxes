@@ -11,7 +11,7 @@ const Schema = mongoose.Schema;
 const edgeSchema = new Schema({
   edgeId: { type: String, required: true },
   taken: { type: Boolean, required: true, 'default': false },
-  type: { type: String, required: true, 'default': "vertical"},
+  type: { type: String, required: true, 'default': 'vertical'},
 });
 
 const boxSchema = new Schema({
