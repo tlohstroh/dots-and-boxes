@@ -6,15 +6,21 @@ import Edge from './Edge'
 
 class Box extends Component {
  render() {
-   const { boxId } = this.props
+   const { boxId, boxOwner } = this.props
+
 
    var edges = this.props.game.edges
    var edgeIds = this.props.boxEdges
 
    var boxEdges = edges.filter(edge => edgeIds.indexOf(edge.edgeId) !== -1)
 
+   const classNames = [
+     'box',
+     boxOwner === 1 ? 'player1' : boxOwner === 0 ? 'player2' : 'nobody'
+   ]
+
    return(
-     <div className="box">
+     <div className={ classNames.join(' ') }>
      { boxEdges.map((edge) => {
        return <Edge
        key={edge.edgeId}

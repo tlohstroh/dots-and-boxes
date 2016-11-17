@@ -17,6 +17,7 @@ const edgeSchema = new Schema({
 const boxSchema = new Schema({
  boxId: { type: String, required: true },
  boxEdges: [String],
+ boxOwner: { type: Number, required: false },
 });
 
 const playerSchema = new Schema({
