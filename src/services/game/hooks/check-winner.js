@@ -38,6 +38,7 @@ module.exports = function(options) {
     // }
     if (matchingBoxOneEdges.filter(id => takenEdgesIds.indexOf(id) !== -1).length === 4){
       console.log("Hallelujah!! A box is won!!!");
+      //set owner of matchingBoxes[0]to equel turn
     }
     else{
       console.log("TAKEN EDGE-IDS: ", takenEdgesIds);

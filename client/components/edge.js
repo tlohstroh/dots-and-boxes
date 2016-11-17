@@ -32,7 +32,6 @@ export class Edge extends Component {
 
         return edge
       })
-      debugger
       // here I could push the edgeId to takenEdgesIds array
       saveGame(game, {takenEdgesIds: game.takenEdgesIds.push(edgeId)})
       console.log("TAKEN EDGES: " + game.takenEdgesIds);
