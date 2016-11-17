@@ -50,6 +50,7 @@ module.exports = function(options) {
             console.log("Way to go!! Another box is won!!!");
             matchingBoxes[1].boxOwner = turn
             console.log("BOX OWNER: ", matchingBoxes[1].boxOwner);
+            players[turn].boxes.push(matchingBoxes[1].boxId)
           }
         }
       }
@@ -59,6 +60,7 @@ module.exports = function(options) {
           console.log("Way to go!! Another box is won!!!");
           matchingBoxes[1].boxOwner = turn
           console.log("BOX OWNER: ", matchingBoxes[1].boxOwner);
+          players[turn].boxes.push(matchingBoxes[1].boxId)
         }
 
         else{
