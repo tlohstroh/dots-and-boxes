@@ -16,20 +16,26 @@ export class Edge extends Component {
     const { game, edgeId, saveGame, currentUser } = this.props
     const players = game.players
     const player = players.filter((player) => player.userId === currentUser._id)
-
     console.log("I want this edge")
     console.log("turn = " + game.turn)
-    if(player[0].playerTurn !== game.turn){
+    // if(player[0].playerTurn !== game.turn){
+    if(false){
         alert("Not your turn!")
       }
     else{
       const newEdges = game.edges.map((edge) => {
         if (edge.edgeId === edgeId) {
+          console.log(edge);
           return Object.assign({}, edge, { taken: true })
+          // here I could push the edge to takenEdges if I wanted (I guess..)
         }
 
         return edge
       })
+      debugger
+      // here I could push the edgeId to takenEdgesIds array
+      saveGame(game, {takenEdgesIds: game.takenEdgesIds.push(edgeId)})
+      console.log("TAKEN EDGES: " + game.takenEdgesIds);
       saveGame(game, { edges: newEdges })
     }
   }
