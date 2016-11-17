@@ -17,7 +17,6 @@ export class Edge extends Component {
     const players = game.players
     const player = players.filter((player) => player.userId === currentUser._id)
     console.log("I want this edge")
-    debugger
     console.log("turn = " + game.turn)
     console.log(player[0].playerTurn);
     if(player[0].playerTurn !== game.turn){
