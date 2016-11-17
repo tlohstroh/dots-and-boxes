@@ -19,8 +19,6 @@ export class Edge extends Component {
     if(players.length < 2){ alert("Please wait for another player") }
     else{
       console.log("I want this edge")
-      console.log("turn = " + game.turn)
-      console.log(player[0].playerTurn);
       if(player[0].playerTurn !== game.turn){
           alert("Not your turn!")
         }

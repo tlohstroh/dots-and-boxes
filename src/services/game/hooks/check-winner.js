@@ -7,13 +7,6 @@
 
 const defaults = {};
 
-// function getMatches(array){
-//   const takenEdgesIds = hook.data.takenEdgesIds;
-//   return array.filter((id) => )
-// };
-
-
-
 module.exports = function(options) {
   options = Object.assign({}, defaults, options);
 
@@ -32,42 +25,35 @@ module.exports = function(options) {
       // filter out the boxes that have pickedEdge in them
       // this will give can array of one or two objects!
       const matchingBoxes = boxes.filter(box => box.boxEdges.indexOf(clickedEdgeId) !== -1);
-      const matchingBoxOneEdges = matchingBoxes[0].boxEdges;
+      const BoxOneEdges = matchingBoxes[0].boxEdges;
       //
       //
 
 
-      if (matchingBoxOneEdges.filter(id => takenEdgesIds.indexOf(id) !== -1).length === 4){
+      if (BoxOneEdges.filter(id => takenEdgesIds.indexOf(id) !== -1).length === 4){
         console.log("Hallelujah!! A box is won!!!");
-        //set owner of matchingBoxes[0]to equel turn
         matchingBoxes[0].boxOwner = turn
-        console.log("BOX OWNER: ", matchingBoxes[0].boxOwner);
         players[turn].boxes.push(matchingBoxes[0].boxId)
 
         if(matchingBoxes.length === 2){
-          const matchingBoxTwoEdges = matchingBoxes[1].boxEdges;
-          if(matchingBoxTwoEdges.filter(id => takenEdgesIds.indexOf(id) !== -1).length === 4){
+          const BoxTwoEdges = matchingBoxes[1].boxEdges;
+          if(BoxTwoEdges.filter(id => takenEdgesIds.indexOf(id) !== -1).length === 4){
             console.log("Way to go!! Another box is won!!!");
             matchingBoxes[1].boxOwner = turn
-            console.log("BOX OWNER: ", matchingBoxes[1].boxOwner);
             players[turn].boxes.push(matchingBoxes[1].boxId)
           }
         }
       }
       else if(matchingBoxes.length === 2){
-        const matchingBoxTwoEdges = matchingBoxes[1].boxEdges;
-        if(matchingBoxTwoEdges.filter(id => takenEdgesIds.indexOf(id) !== -1).length === 4){
-          console.log("Way to go!! Another box is won!!!");
+        const BoxTwoEdges = matchingBoxes[1].boxEdges;
+        if(BoxTwoEdges.filter(id => takenEdgesIds.indexOf(id) !== -1).length === 4){
+          console.log("Hallelujah!! A box is won!!!");
           matchingBoxes[1].boxOwner = turn
-          console.log("BOX OWNER: ", matchingBoxes[1].boxOwner);
           players[turn].boxes.push(matchingBoxes[1].boxId)
         }
 
         else{
-          console.log("TAKEN EDGE-IDS: ", takenEdgesIds);
-          console.log("MATCHING BOXES: ", matchingBoxes.length);
           console.log("No box is won...");
-          console.log("....................");
           let nextTurn = turn + 1
           if (nextTurn > 1){
             nextTurn = 0
@@ -76,10 +62,7 @@ module.exports = function(options) {
         }
       }
       else{
-        console.log("TAKEN EDGE-IDS: ", takenEdgesIds);
-        console.log("MATCHING BOXES: ", matchingBoxes.length);
         console.log("No box is won...");
-        console.log("....................");
         let nextTurn = turn + 1
         if (nextTurn > 1){
           nextTurn = 0
