@@ -44,7 +44,6 @@ module.exports = function(options) {
         console.log("BOX OWNER: ", matchingBoxes[0].boxOwner);
         players[turn].boxes.push(matchingBoxes[0].boxId)
 
-
         if(matchingBoxes.length === 2){
           const matchingBoxTwoEdges = matchingBoxes[1].boxEdges;
           if(matchingBoxTwoEdges.filter(id => takenEdgesIds.indexOf(id) !== -1).length === 4){
@@ -54,10 +53,28 @@ module.exports = function(options) {
           }
         }
       }
+      else if(matchingBoxes.length === 2){
+        const matchingBoxTwoEdges = matchingBoxes[1].boxEdges;
+        if(matchingBoxTwoEdges.filter(id => takenEdgesIds.indexOf(id) !== -1).length === 4){
+          console.log("Way to go!! Another box is won!!!");
+          matchingBoxes[1].boxOwner = turn
+          console.log("BOX OWNER: ", matchingBoxes[1].boxOwner);
+        }
+
+        else{
+          console.log("TAKEN EDGE-IDS: ", takenEdgesIds);
+          console.log("MATCHING BOXES: ", matchingBoxes.length);
+          console.log("No box is won...");
+          console.log("....................");
+          let nextTurn = turn + 1
+          if (nextTurn > 1){
+            nextTurn = 0
+          }
+          hook.data.turn = nextTurn
+        }
+      }
       else{
-        console.log("hello");
         console.log("TAKEN EDGE-IDS: ", takenEdgesIds);
-        console.log("BOX EDGES box 1: ", matchingBoxes[0].boxEdges);
         console.log("MATCHING BOXES: ", matchingBoxes.length);
         console.log("No box is won...");
         console.log("....................");
@@ -66,6 +83,7 @@ module.exports = function(options) {
           nextTurn = 0
         }
         hook.data.turn = nextTurn
+
       }
     }
   }
