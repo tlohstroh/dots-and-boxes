@@ -36,9 +36,8 @@ class Game extends Component {
     saveGame(game, { players: game.players.concat({
       userId: currentUser._id,
       name: currentUser.name,
-      playerTurn: (game.players.length),
+      playerTurn: game.players.length,
       color: PLAYER_COLORS[game.players.length],
-
     })})
   }
 
@@ -59,11 +58,10 @@ class Game extends Component {
 
     return(
       <div className="game">
-        {/* <p>Is player: { this.isPlayer() ? 'Yes' : 'No' }</p>
-        <p>Can join: { this.canJoin() ? 'Yes' : 'No' }</p> */}
+        <p>Is player: { this.isPlayer() ? 'Yes' : 'No' }</p>
+        <p>Can join: { this.canJoin() ? 'Yes' : 'No' }</p>
         <div className="scoreboard">
-          { game.players.map((player) => <p>{player.name}: SCORE = {player.boxes.length}</p>) }
-          <div className="Winner">The winner is: {game.winner}</div>
+          { game.players.map((player) => player.name) }
         </div>
         <div>
           <h1>Game Board here:</h1>
