@@ -18,8 +18,8 @@ export class Edge extends Component {
     const player = players.filter((player) => player.userId === currentUser._id)
     console.log("I want this edge")
     console.log("turn = " + game.turn)
-    // if(player[0].playerTurn !== game.turn){
-    if(false){
+    if(player[0].playerTurn !== game.turn){
+    // if(false){
         alert("Not your turn!")
       }
     else{
