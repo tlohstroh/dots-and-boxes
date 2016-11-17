@@ -22,6 +22,7 @@ module.exports = function(options) {
     const boxes = hook.data.boxes;
     const edges = hook.data.edges;
     const takenEdgesIds = hook.data.takenEdgesIds;
+    const players = hook.data.players;
 
     if(takenEdgesIds.length > 0){
 
@@ -37,11 +38,13 @@ module.exports = function(options) {
 
 
       if (matchingBoxOneEdges.filter(id => takenEdgesIds.indexOf(id) !== -1).length === 4){
-
         console.log("Hallelujah!! A box is won!!!");
         //set owner of matchingBoxes[0]to equel turn
         matchingBoxes[0].boxOwner = turn
         console.log("BOX OWNER: ", matchingBoxes[0].boxOwner);
+        players[turn].boxes.push(matchingBoxes[0].boxId)
+
+
         if(matchingBoxes.length === 2){
           const matchingBoxTwoEdges = matchingBoxes[1].boxEdges;
           if(matchingBoxTwoEdges.filter(id => takenEdgesIds.indexOf(id) !== -1).length === 4){

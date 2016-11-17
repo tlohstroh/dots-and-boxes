@@ -61,7 +61,9 @@ class Game extends Component {
         <p>Is player: { this.isPlayer() ? 'Yes' : 'No' }</p>
         <p>Can join: { this.canJoin() ? 'Yes' : 'No' }</p>
         <div className="scoreboard">
-          { game.players.map((player) => player.name) }
+          <span key="playernames">{ game.players.map((player) => player.name)}</span>
+          <span key="playerscores">{ game.players.map((player) => <p>{player.name}: SCORE = {player.boxes.length}</p>) }</span>
+
         </div>
         <div>
           <h1>Game Board here:</h1>

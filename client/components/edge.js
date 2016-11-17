@@ -28,7 +28,6 @@ export class Edge extends Component {
         if (edge.edgeId === edgeId) {
           // console.log(edge);
           return Object.assign({}, edge, { taken: true })
-          // here I could push the edge to takenEdges if I wanted (I guess..)
         }
 
         return edge
