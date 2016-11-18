@@ -36,7 +36,7 @@ export class Edge extends Component {
         saveGame(game, { edges: newEdges })
       }
     }
-  }
+  } // end takeEdge
 
 
  render() {

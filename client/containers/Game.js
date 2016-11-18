@@ -63,7 +63,7 @@ class Game extends Component {
         <div className="scoreboard">
           <div key="players">{ game.players.map((player) => <p className="score">{player.name}: SCORE = {player.boxes.length}</p>) }</div>
           <div>
-            <h1 className="winner">Winner: {game.winner}</h1>
+            <h1 className="winner"> Winner: { game.winner }</h1>
           </div>
         </div>
         <Board />

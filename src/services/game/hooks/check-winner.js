@@ -16,7 +16,9 @@ module.exports = function(options) {
     const edges = hook.data.edges;
     const takenEdgesIds = hook.data.takenEdgesIds;
     const players = hook.data.players;
+    const winner = hook.data.winner;
 
+    // check winner part
     if(takenEdgesIds.length > 0){
 
       const takenEdgesIds = hook.data.takenEdgesIds;
@@ -70,6 +72,27 @@ module.exports = function(options) {
         hook.data.turn = nextTurn
 
       }
-    }
-  }
-}
+
+      // Decide final winner:
+      // if all edges are taken
+      if (edges.filter(edge => edge.taken === true).length === 24){
+        console.log("Decide final winner function is triggered...");
+        // determin the hightest score.
+        const highestScore = players.reduce((prevBoxes, nextPlayer) => {
+        const nextBoxes = nextPlayer.boxes.length
+        return prevPairs > nextBoxes ? prevBoxes : nextBoxes
+        }, 0)
+        console.log(highestScore);
+        // push player with highest score into winner
+        const gameWinner = players.filter((player) => {player.boxes === hightsthighestScore})
+
+        hook.data.winner = gameWinner.name
+      }
+
+
+
+
+
+    } // end check winner part
+  } // end function(hook)
+} // end module.exports
