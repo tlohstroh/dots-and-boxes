@@ -58,15 +58,13 @@ class Game extends Component {
 
     return(
       <div className="game">
-        <p>Is player: { this.isPlayer() ? 'Yes' : 'No' }</p>
-        <p>Can join: { this.canJoin() ? 'Yes' : 'No' }</p>
+        {/* <p>Is player: { this.isPlayer() ? 'Yes' : 'No' }</p>
+        <p>Can join: { this.canJoin() ? 'Yes' : 'No' }</p> */}
         <div className="scoreboard">
-          <span key="playernames">{ game.players.map((player) => player.name)}</span>
-          <span key="playerscores">{ game.players.map((player) => <p>{player.name}: SCORE = {player.boxes.length}</p>) }</span>
-
-        </div>
-        <div>
-          <h1>Game Board here:</h1>
+          <div key="players">{ game.players.map((player) => <p className="score">{player.name}: SCORE = {player.boxes.length}</p>) }</div>
+          <div>
+            <h1 className="winner">Winner: {game.winner}</h1>
+          </div>
         </div>
         <Board />
       </div>
