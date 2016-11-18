@@ -28,9 +28,6 @@ module.exports = function(options) {
       // this will give can array of one or two objects!
       const matchingBoxes = boxes.filter(box => box.boxEdges.indexOf(clickedEdgeId) !== -1);
       const BoxOneEdges = matchingBoxes[0].boxEdges;
-      //
-      //
-
 
       if (BoxOneEdges.filter(id => takenEdgesIds.indexOf(id) !== -1).length === 4){
         console.log("Hallelujah!! A box is won!!!");
@@ -70,29 +67,27 @@ module.exports = function(options) {
           nextTurn = 0
         }
         hook.data.turn = nextTurn
-
       }
-
-      // Decide final winner:
-      // if all edges are taken
-      if (edges.filter(edge => edge.taken === true).length === 24){
-        console.log("Decide final winner function is triggered...");
-        // determin the hightest score.
-        const highestScore = players.reduce((prevBoxes, nextPlayer) => {
-        const nextBoxes = nextPlayer.boxes.length
-        return prevPairs > nextBoxes ? prevBoxes : nextBoxes
-        }, 0)
-        console.log(highestScore);
-        // push player with highest score into winner
-        const gameWinner = players.filter((player) => {player.boxes === hightsthighestScore})
-
-        hook.data.winner = gameWinner.name
-      }
-
-
-
-
 
     } // end check winner part
+
+    // Decide final winner:
+    if (edges.filter(edge => edge.taken === true).length === 24){
+      console.log("Decide final winner function is triggered...");
+      // determin the hightest score.
+      debugger
+      const highestScore = players.reduce((prevBoxes, nextPlayer) => {
+      const nextBoxes = nextPlayer.boxes.length
+      return prevPairs > nextBoxes ? prevBoxes : nextBoxes
+      }, 0)
+      console.log(highestScore);
+      // push player with highest score into winner
+      const gameWinner = players.filter((player) => {player.boxes === hightsthighestScore})
+
+      hook.data.winner = gameWinner.name
+    } // end final winner
+
+
+
   } // end function(hook)
 } // end module.exports
