@@ -104,7 +104,13 @@ class Game extends Component {
           </div>
         </div>
         <Board />
-        { ( this.notYouTurn.bind(this)() ) ? <div className="alert"><h1>Be patient, it's not your turn! { otherPlayer.name.toUpperCase() } is still thinking... <br/> <br/>Or getting coffee...</h1></div> : null }
+        { ( this.notYouTurn.bind(this)() ) ?
+          <div className="alert">
+            <div>
+              <h2>Be patient, it's not your turn! { otherPlayer.name } is still thinking... <br/> <br/>Or getting coffee...</h2>
+            </div>
+          </div>
+          : null }
       </div> // end div className="game"
     ) // end return
   } // end render
