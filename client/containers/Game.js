@@ -71,6 +71,14 @@ class Game extends Component {
     if (turn != currentPlayer.playerTurn) { return true }
   }
 
+  gameNotOver(){
+    const { players } = this.props.game
+    const playerOneScore = players[0].boxes.length
+    const playerTwoScore = players[1].boxes.length
+    if (playerOneScore + playerTwoScore < 9){return true}
+    return false
+  }
+
   waitForOtherPlayer(){
     const otherPlayer = this.otherPlayer()
     // check if there is another player
@@ -105,7 +113,7 @@ class Game extends Component {
           </div>
         </div>
         <Board />
-        { ( this.notYouTurn.bind(this)() ) ?
+        { (( this.notYouTurn.bind(this)() ) && this.gameNotOver.bind(this)() ) ?
           <div className="alert">
             <div>
               <h2>Be patient, it's not your turn! { otherPlayer.name } is still thinking... <br/> <br/>Or getting coffee...</h2>
