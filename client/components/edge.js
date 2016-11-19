@@ -20,7 +20,8 @@ export class Edge extends Component {
     else{
       console.log("I want this edge")
       if(player[0].playerTurn !== game.turn){
-          alert("Not your turn!")
+          // alert("Not your turn!")
+          return
         }
       else{
         const newEdges = game.edges.map((edge) => {
