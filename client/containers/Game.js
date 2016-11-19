@@ -41,8 +41,45 @@ class Game extends Component {
     })})
   }
 
+  currentPlayer(){
+    const { game, currentUser } = this.props
+    const { players } = this.props.game
+    // check if there actually are there are players...
+    if( !!!players ) { return }
+    // filter out the current player and return it
+    return players.filter((player) => player.userId === currentUser._id)[0]
+  }
+
+  otherPlayer(){
+    const { game, currentUser } = this.props
+    const { players } = this.props.game
+    // check if there actually are there are players...
+    if( !!!players ) { return }
+    // check if there are two players
+    if( players.length < 2 ) { return }
+    // filter out the other player and return it
+    return players.filter((player) => player.userId != currentUser._id)[0]
+  }
+
+  notYouTurn(){
+    const currentPlayer = this.currentPlayer()
+    const otherPlayer = this.otherPlayer()
+    const { turn } = this.props.game
+    // check if there is another player
+    if ( !otherPlayer ) { return false }
+    // if turn is not playerTurn return true
+    if (turn != currentPlayer.playerTurn) { return true }
+  }
+
+  waitForOtherPlayer(){
+    const otherPlayer = this.otherPlayer()
+    // check if there is another player
+    if ( !otherPlayer ) { return true }
+  }
+
   render() {
     const { game } = this.props
+    const otherPlayer = this.otherPlayer()
     if (!!!game._id) { return null }
 
     if (this.canJoin()) {
@@ -54,7 +91,7 @@ class Game extends Component {
           <Link to="/"><FlatButton label="Back to the Lobby" /></Link>
         </Paper>
       )
-    }
+    } // end if() return
 
     return(
       <div className="game">
@@ -67,10 +104,11 @@ class Game extends Component {
           </div>
         </div>
         <Board />
-      </div>
-    )
-  }
-}
+        { ( this.notYouTurn.bind(this)() ) ? <div className="alert"><h1>Be patient, it's not your turn! { otherPlayer.name.toUpperCase() } is still thinking... <br/> <br/>Or getting coffee...</h1></div> : null }
+      </div> // end div className="game"
+    ) // end return
+  } // end render
+} // end component
 
 Game.propTypes = {
   game: PropTypes.object.isRequired,
