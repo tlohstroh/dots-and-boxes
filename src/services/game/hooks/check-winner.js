@@ -16,14 +16,15 @@ module.exports = function(options) {
     const edges = hook.data.edges;
     const takenEdgesIds = hook.data.takenEdgesIds;
     const players = hook.data.players;
+    const winner = hook.data.winner;
 
     // check winner part
     if( takenEdgesIds.length > 0 ){
 
       // if total score is 9, return
-      const playerOneScore = players[0].boxes.length;
-      const playerTwoScore = players[1].boxes.length;
-      if (playerOneScore + playerTwoScore === 9){return};
+      // const playerOneScore = players[0].boxes.length;
+      // const playerTwoScore = players[1].boxes.length;
+      // if (playerOneScore + playerTwoScore >= 9){return};
 
 
       const takenEdgesIds = hook.data.takenEdgesIds;
@@ -98,7 +99,9 @@ module.exports = function(options) {
       const gameWinner = players.filter((player) => player.boxes.length === highestScore)
       console.log(gameWinner[0].name);
 
+      console.log(hook.data.winner)
       hook.data.winner = gameWinner[0].name
+      console.log(hook.data.winner)
     } // end final winner
 
 
