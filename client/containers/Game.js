@@ -113,13 +113,19 @@ class Game extends Component {
           </div>
         </div>
         <Board />
+
         { (( this.notYouTurn.bind(this)() ) && this.gameNotOver.bind(this)() ) ?
           <div className="alert">
-            <div>
               <h2>Be patient, it's not your turn! { otherPlayer.name } is still thinking... <br/> <br/>Or getting coffee...</h2>
-            </div>
           </div>
           : null }
+
+        { ( this.waitForOtherPlayer.bind(this)() )  ?
+          <div className="alert">
+              <h2>Nobody else here to play with...  <br/> <br/>Invite a friend!</h2>
+          </div>
+          : null }
+          
       </div> // end div className="game"
     ) // end return
   } // end render
