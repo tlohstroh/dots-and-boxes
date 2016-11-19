@@ -20,13 +20,19 @@ class Box extends Component {
    ]
 
    return(
-     <div className={ classNames.join(' ') }>
-     { boxEdges.map((edge) => {
-       return <Edge
-       key={edge.edgeId}
-       { ...edge } />
-     })}
-     </div>
+
+       <div className={ classNames.join(' ') }>
+       { boxEdges.map((edge) => {
+         return <Edge
+         key={edge.edgeId}
+         { ...edge } />
+       })}
+       <p className="dot1 dot"></p>
+       <p className="dot2 dot"></p>
+       <p className="dot3 dot"></p>
+       <p className="dot4 dot"></p>
+       </div>
+
    )
  }
  }
