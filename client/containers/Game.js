@@ -43,6 +43,7 @@ class Game extends Component {
 
   render() {
     const { game } = this.props
+    const { winner } = this.props.game
     if (!!!game._id) { return null }
 
     if (this.canJoin()) {
@@ -63,7 +64,7 @@ class Game extends Component {
         <div className="scoreboard">
           <div key="players">{ game.players.map((player) => <p className="score">{player.name}: SCORE = {player.boxes.length}</p>) }</div>
           <div>
-            <h1 className="winner"> Winner: { game.winner }</h1>
+            <h1 className="winner"> Winner: { winner }</h1>
           </div>
         </div>
         <Board />

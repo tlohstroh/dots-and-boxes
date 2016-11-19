@@ -16,10 +16,15 @@ module.exports = function(options) {
     const edges = hook.data.edges;
     const takenEdgesIds = hook.data.takenEdgesIds;
     const players = hook.data.players;
-    const winner = hook.data.winner;
 
     // check winner part
-    if(takenEdgesIds.length > 0){
+    if( takenEdgesIds.length > 0 ){
+
+      // if total score is 9, return
+      const playerOneScore = players[0].boxes.length;
+      const playerTwoScore = players[1].boxes.length;
+      if (playerOneScore + playerTwoScore === 9){return};
+
 
       const takenEdgesIds = hook.data.takenEdgesIds;
       const clickedEdgeId = takenEdgesIds[(takenEdgesIds.length)-1];
@@ -28,6 +33,8 @@ module.exports = function(options) {
       // this will give can array of one or two objects!
       const matchingBoxes = boxes.filter(box => box.boxEdges.indexOf(clickedEdgeId) !== -1);
       const BoxOneEdges = matchingBoxes[0].boxEdges;
+
+      // if (edges.filter(edge => edge.taken === true).length === 24){ return }
 
       if (BoxOneEdges.filter(id => takenEdgesIds.indexOf(id) !== -1).length === 4){
         console.log("Hallelujah!! A box is won!!!");
@@ -74,17 +81,24 @@ module.exports = function(options) {
     // Decide final winner:
     if (edges.filter(edge => edge.taken === true).length === 24){
       console.log("Decide final winner function is triggered...");
+      const players = hook.data.players;
       // determin the hightest score.
-      debugger
-      const highestScore = players.reduce((prevBoxes, nextPlayer) => {
-      const nextBoxes = nextPlayer.boxes.length
-      return prevPairs > nextBoxes ? prevBoxes : nextBoxes
-      }, 0)
-      console.log(highestScore);
-      // push player with highest score into winner
-      const gameWinner = players.filter((player) => {player.boxes === hightsthighestScore})
+      console.log(players);
 
-      hook.data.winner = gameWinner.name
+      const playerOneScore = players[0].boxes.length;
+      const playerTwoScore = players[1].boxes.length;
+
+      console.log(playerOneScore);
+      console.log(playerTwoScore);
+
+      const highestScore = Math.max(playerOneScore, playerTwoScore);
+      console.log("highestScore = ", highestScore);
+
+      // push player with highest score into winner
+      const gameWinner = players.filter((player) => player.boxes.length === highestScore)
+      console.log(gameWinner[0].name);
+
+      hook.data.winner = gameWinner[0].name
     } // end final winner
 
 
