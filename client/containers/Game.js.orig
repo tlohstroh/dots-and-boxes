@@ -79,8 +79,11 @@ class Game extends Component {
 
   render() {
     const { game } = this.props
+<<<<<<< HEAD
     const { winner } = this.props.game
+=======
     const otherPlayer = this.otherPlayer()
+>>>>>>> master
     if (!!!game._id) { return null }
 
     if (this.canJoin()) {
