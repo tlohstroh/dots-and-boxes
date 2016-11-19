@@ -13,30 +13,25 @@ export class Edge extends Component {
   }
 
   takeEdge(){
-    const { game, edgeId, saveGame, currentUser, playerTurn} = this.props
+    const { game, edgeId, saveGame, currentUser, playerTurn } = this.props
     const players = game.players
-    const player = players.filter((player) => player.userId === currentUser._id)
-    if(players.length < 2){ alert("Please wait for another player") }
-    else{
-      console.log("I want this edge")
-      if(player[0].playerTurn !== game.turn){
-          // alert("Not your turn!")
-          return
-        }
-      else{
-        const newEdges = game.edges.map((edge) => {
-          if (edge.edgeId === edgeId) {
-            // console.log(edge);
-            return Object.assign({}, edge, { taken: true })
-          }
+    const player = players.filter(( player ) => player.userId === currentUser._id )
 
-          return edge
+    if( players.length < 2 ){ return }
+    if( player[0].playerTurn !== game.turn ){ return }
+
+    const newEdges = game.edges.map((edge) => {
+      if (edge.edgeId === edgeId) {
+        return Object.assign({}, edge, { taken: true })
+        }
+        return edge
         })
-        saveGame(game, {takenEdgesIds: game.takenEdgesIds.push(edgeId)})
-        console.log("TAKEN EDGES: " + game.takenEdgesIds);
-        saveGame(game, { edges: newEdges })
-      }
-    }
+
+    saveGame(game, {takenEdgesIds: game.takenEdgesIds.push(edgeId)})
+    console.log("TAKEN EDGES: " + game.takenEdgesIds);
+    saveGame(game, { edges: newEdges })
+
+
   } // end takeEdge
 
 
