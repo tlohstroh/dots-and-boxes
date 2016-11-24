@@ -1,3 +1,14 @@
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes edge
+    from {background-color: rgba(229, 230, 232, 0.6);}
+    to {background-color: #3b99a5;}
+
+
+/* Standard syntax */
+@keyframes edge
+    from {background-color: rgba(229, 230, 232, 0.6);}
+    to {background-color: #3b99a5;}
+
 .horizontal
   width: 190
   height: 9
@@ -20,3 +31,11 @@
 
 .taken
   background-color: #3b99a5
+  -webkit-animation-name: edge; /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 5s; /* Safari 4.0 - 8.0 */
+  -webkit-animation-iteration-count: infinite; /* Safari 4.0 - 8.0 */
+  -webkit-timing-function: ease; /* Safari 4.0 - 8.0 */
+  animation-name: edge
+  animation-duration: 0.25s
+  animation-iteration-count: 5
+  animation-timing-function: ease
