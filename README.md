@@ -1,5 +1,7 @@
 # FeathersJS + React + Webpack
 
+![alt tag](http://res.cloudinary.com/ddpouudhk/image/upload/v1480001947/tjitske-final-assignment_quiyje.png)
+
 ## About
 
 This project uses [Feathers](http://feathersjs.com). An open source web framework for building modern real-time applications.
