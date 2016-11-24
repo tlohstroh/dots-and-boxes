@@ -123,7 +123,7 @@ class Game extends Component {
         { ( this.waitForOtherPlayer.bind(this)() )  ?
           <div className="alert">
             <div>
-              <h2>Nobody else here to play with... You can wait, or invite a friend!</h2>
+              <h2>Nobody else here to play with... Please wait, or invite a friend!</h2>
             </div>
           </div>
           : null }
