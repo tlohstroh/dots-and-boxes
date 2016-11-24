@@ -116,7 +116,7 @@ class Game extends Component {
 
         { (( this.notYouTurn.bind(this)() ) && this.gameNotOver.bind(this)() ) ?
           <div className="alert">
-              <h2>Be patient, it's not your turn! { otherPlayer.name } is still thinking... <br/> <br/>Or getting coffee...</h2>
+              <h2>Be patient, it's not your turn! { otherPlayer.name } is still thinking... <br/> <br/><span className="coffee">Or getting coffee...</span></h2>
           </div>
           : null }
 
