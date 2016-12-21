@@ -18,8 +18,32 @@ module.exports = function(options) {
     const players = hook.data.players;
     const winner = hook.data.winner;
 
-    // check winner part
+// check winner part /////////////////////////////////////////////////////////
+
     if( takenEdgesIds.length > 0 ){
+
+      function noBoxWon() {
+        console.log("No box is won...");
+        let nextTurn = turn + 1;
+          nextTurn > 1 ? nextTurn = 0 : null;
+          hook.data.turn = nextTurn;
+      };
+
+      function checkBox(box){
+        return box.filter(id => takenEdgesIds.indexOf(id) !== -1).length === 4
+      }
+
+      function firstBoxWon(){
+        console.log("Hallelujah!! A box is won!!!");
+        matchingBoxes[0].boxOwner = turn
+        players[turn].boxes.push(matchingBoxes[0].boxId)
+      };
+
+      function secondBoxWon(){
+        console.log("Way to go!! Another box is won!!!");
+        matchingBoxes[1].boxOwner = turn
+        players[turn].boxes.push(matchingBoxes[1].boxId)
+      };
 
       // if total score is 9, return
       const playerOneScore = players[0].boxes.length;
@@ -35,68 +59,41 @@ module.exports = function(options) {
       const matchingBoxes = boxes.filter(box => box.boxEdges.indexOf(clickedEdgeId) !== -1);
       const BoxOneEdges = matchingBoxes[0].boxEdges;
 
-      function noBoxWon() {
-        let nextTurn = turn + 1;
-          nextTurn > 1 ? nextTurn = 0 : null;
-          hook.data.turn = nextTurn;
-      };
 
-      function checkFirstBox(){
-        return BoxOneEdges.filter(id => takenEdgesIds.indexOf(id) !== -1).length === 4
-      }
 
-      function checkSecondBox(){
-        const BoxTwoEdges = matchingBoxes[1].boxEdges;
-        return BoxTwoEdges.filter(id => takenEdgesIds.indexOf(id) !== -1).length === 4
-      }
-
-      function firstBoxWon(){
-        matchingBoxes[0].boxOwner = turn
-        players[turn].boxes.push(matchingBoxes[0].boxId)
-      };
-
-      function secondBoxWon(){
-        matchingBoxes[1].boxOwner = turn
-        players[turn].boxes.push(matchingBoxes[1].boxId)
-      };
-
-      // if (edges.filter(edge => edge.taken === true).length === 24){ return }
 
       // check first matching box (there is always a first box)
-      if (checkFirstBox() === true){
-        console.log("Hallelujah!! A box is won!!!");
+      if (checkBox(BoxOneEdges) === true){
         firstBoxWon()
-
         // then check if there is another matching box
         if(matchingBoxes.length === 2){
           const BoxTwoEdges = matchingBoxes[1].boxEdges;
-          if(checkSecondBox() === true){
-            console.log("Way to go!! Another box is won!!!");
+          if(checkBox(BoxTwoEdges) === true){
             secondBoxWon()
           }
         }
       }
+
       // if the first box is not won, but there is a second box, check that one.
       else if(matchingBoxes.length === 2){
         const BoxTwoEdges = matchingBoxes[1].boxEdges;
-        if(checkSecondBox() === true){
-          console.log("Hallelujah!! A box is won!!!");
+        if(checkBox(BoxTwoEdges) === true){
           secondBoxWon()
         }
-
-        // if the second box
         else{
-          console.log("No box is won...");
           noBoxWon()
         }
       }
+
       // if there are no winning boxes...
       else{
-        console.log("No box is won...");
         noBoxWon();
       }
+    }
 
-    } // end check winner part
+////////////////////////////////////////////////////////////////////////////////
+
+
 
     // Decide final winner:
     if (edges.filter(edge => edge.taken === true).length === 24){
