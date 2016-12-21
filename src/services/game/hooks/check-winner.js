@@ -35,19 +35,35 @@ module.exports = function(options) {
       const matchingBoxes = boxes.filter(box => box.boxEdges.indexOf(clickedEdgeId) !== -1);
       const BoxOneEdges = matchingBoxes[0].boxEdges;
 
-      // if (edges.filter(edge => edge.taken === true).length === 24){ return }
+      function noBoxWon() {
+        let nextTurn = turn + 1;
+          nextTurn > 1 ? nextTurn = 0 : null;
+          hook.data.turn = nextTurn;
+      };
 
-      if (BoxOneEdges.filter(id => takenEdgesIds.indexOf(id) !== -1).length === 4){
-        console.log("Hallelujah!! A box is won!!!");
+      function firstBoxWon(){
         matchingBoxes[0].boxOwner = turn
         players[turn].boxes.push(matchingBoxes[0].boxId)
+      };
 
+      function secondBoxWon(){
+        matchingBoxes[1].boxOwner = turn
+        players[turn].boxes.push(matchingBoxes[1].boxId)
+      };
+
+      // if (edges.filter(edge => edge.taken === true).length === 24){ return }
+
+      // checking first box
+      if (BoxOneEdges.filter(id => takenEdgesIds.indexOf(id) !== -1).length === 4){
+        console.log("Hallelujah!! A box is won!!!");
+        firstBoxWon()
+
+        // then checking second box if any
         if(matchingBoxes.length === 2){
           const BoxTwoEdges = matchingBoxes[1].boxEdges;
           if(BoxTwoEdges.filter(id => takenEdgesIds.indexOf(id) !== -1).length === 4){
             console.log("Way to go!! Another box is won!!!");
-            matchingBoxes[1].boxOwner = turn
-            players[turn].boxes.push(matchingBoxes[1].boxId)
+            secondBoxWon()
           }
         }
       }
@@ -55,26 +71,17 @@ module.exports = function(options) {
         const BoxTwoEdges = matchingBoxes[1].boxEdges;
         if(BoxTwoEdges.filter(id => takenEdgesIds.indexOf(id) !== -1).length === 4){
           console.log("Hallelujah!! A box is won!!!");
-          matchingBoxes[1].boxOwner = turn
-          players[turn].boxes.push(matchingBoxes[1].boxId)
+          secondBoxWon()
         }
 
         else{
           console.log("No box is won...");
-          let nextTurn = turn + 1
-          if (nextTurn > 1){
-            nextTurn = 0
-          }
-          hook.data.turn = nextTurn
+          noBoxWon()
         }
       }
       else{
         console.log("No box is won...");
-        let nextTurn = turn + 1
-        if (nextTurn > 1){
-          nextTurn = 0
-        }
-        hook.data.turn = nextTurn
+        noBoxWon();
       }
 
     } // end check winner part
