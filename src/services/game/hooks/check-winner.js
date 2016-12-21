@@ -33,17 +33,12 @@ module.exports = function(options) {
         return box.filter(id => takenEdgesIds.indexOf(id) !== -1).length === 4
       }
 
-      function firstBoxWon(){
+      function BoxWon(index){
         console.log("Hallelujah!! A box is won!!!");
-        matchingBoxes[0].boxOwner = turn
+        matchingBoxes[index].boxOwner = turn
         players[turn].boxes.push(matchingBoxes[0].boxId)
       };
 
-      function secondBoxWon(){
-        console.log("Way to go!! Another box is won!!!");
-        matchingBoxes[1].boxOwner = turn
-        players[turn].boxes.push(matchingBoxes[1].boxId)
-      };
 
       // if total score is 9, return
       const playerOneScore = players[0].boxes.length;
@@ -62,14 +57,15 @@ module.exports = function(options) {
 
 
 
+
       // check first matching box (there is always a first box)
       if (checkBox(BoxOneEdges) === true){
-        firstBoxWon()
+        BoxWon(0)
         // then check if there is another matching box
         if(matchingBoxes.length === 2){
           const BoxTwoEdges = matchingBoxes[1].boxEdges;
           if(checkBox(BoxTwoEdges) === true){
-            secondBoxWon()
+            BoxWon(1)
           }
         }
       }
@@ -78,7 +74,7 @@ module.exports = function(options) {
       else if(matchingBoxes.length === 2){
         const BoxTwoEdges = matchingBoxes[1].boxEdges;
         if(checkBox(BoxTwoEdges) === true){
-          secondBoxWon()
+          BoxWon(1)
         }
         else{
           noBoxWon()
