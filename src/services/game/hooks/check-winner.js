@@ -41,6 +41,15 @@ module.exports = function(options) {
           hook.data.turn = nextTurn;
       };
 
+      function checkFirstBox(){
+        return BoxOneEdges.filter(id => takenEdgesIds.indexOf(id) !== -1).length === 4
+      }
+
+      function checkSecondBox(){
+        const BoxTwoEdges = matchingBoxes[1].boxEdges;
+        return BoxTwoEdges.filter(id => takenEdgesIds.indexOf(id) !== -1).length === 4
+      }
+
       function firstBoxWon(){
         matchingBoxes[0].boxOwner = turn
         players[turn].boxes.push(matchingBoxes[0].boxId)
@@ -53,32 +62,35 @@ module.exports = function(options) {
 
       // if (edges.filter(edge => edge.taken === true).length === 24){ return }
 
-      // checking first box
-      if (BoxOneEdges.filter(id => takenEdgesIds.indexOf(id) !== -1).length === 4){
+      // check first matching box (there is always a first box)
+      if (checkFirstBox() === true){
         console.log("Hallelujah!! A box is won!!!");
         firstBoxWon()
 
-        // then checking second box if any
+        // then check if there is another matching box
         if(matchingBoxes.length === 2){
           const BoxTwoEdges = matchingBoxes[1].boxEdges;
-          if(BoxTwoEdges.filter(id => takenEdgesIds.indexOf(id) !== -1).length === 4){
+          if(checkSecondBox() === true){
             console.log("Way to go!! Another box is won!!!");
             secondBoxWon()
           }
         }
       }
+      // if the first box is not won, but there is a second box, check that one.
       else if(matchingBoxes.length === 2){
         const BoxTwoEdges = matchingBoxes[1].boxEdges;
-        if(BoxTwoEdges.filter(id => takenEdgesIds.indexOf(id) !== -1).length === 4){
+        if(checkSecondBox() === true){
           console.log("Hallelujah!! A box is won!!!");
           secondBoxWon()
         }
 
+        // if the second box
         else{
           console.log("No box is won...");
           noBoxWon()
         }
       }
+      // if there are no winning boxes...
       else{
         console.log("No box is won...");
         noBoxWon();
