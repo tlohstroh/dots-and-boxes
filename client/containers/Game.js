@@ -28,7 +28,7 @@ class Game extends Component {
   canJoin() {
     if (this.isPlayer()) { return false }
     const { game } = this.props
-    return game.players.length < 3
+    return game.players.length < 2
   }
 
   joinGame() {
@@ -101,6 +101,16 @@ class Game extends Component {
         </Paper>
       )
     } // end if() return
+    else if (!this.canJoin() && !this.isPlayer()){
+      return(
+        <Paper zDepth={3} className="join-game">
+          <h3>You can't join this game!</h3>
+          <p>{ game.players.map((player) => player.name).join(' and ') } are already playing...</p>
+          <Link to="/"><FlatButton label="Back to the Lobby" /></Link>
+        </Paper>
+      )
+    }
+
 
     return(
       <div className="game">
